@@ -12,6 +12,7 @@ namespace EditorHtml
             WriteOptions();
 
             var option = short.Parse(Console.ReadLine());
+            HandleMenuOptions(option);
         }
 
         //Desenha tela para melor experiencia do usuário
@@ -61,7 +62,21 @@ namespace EditorHtml
             Console.Write("Sua opção: ");
 
         }
+        public static void HandleMenuOptions(short option)
+        {
+
+            switch (option)
+            {
+                case 1: Editor.Show(); break;
+                case 2: Console.WriteLine("View"); break;
+                case 0:
+                    {
+                        Console.Clear();
+                        Environment.Exit(0);
+                        break;
+                    }
+                default: Show(); break;
+            }
+        }
     }
-
-
 }
