@@ -24,24 +24,33 @@ namespace EditorHtml
         {
             Console.Write(text);
             // função que substitui alguns caracteres especiais
-            var strong = new Regex(@"<\s*strong[^>]*>(.*?)<\s*/\s*strong>");
+            var strong = "<strong>";//new Regex(@"<\s*strong[^>]*>(.*?)<\s*/\s*strong>");
             //var words = text.Split(Separator);
             var words = text.Split(' ');
 
+            
 
             for (var i = 0; i < words.Length; i++)
             {
-                if (strong.IsMatch(words[i]))
+                
+                if (words[i] == strong)
                 {
+
+
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(
-                        //escrever o texto na cor azul, porém sem o strong ou /strong
-                        words[i].Substring(// pede primeiro e último caracter
-                            words[i].IndexOf('>') + 1 , //por se tratar de lista, adiciona-se mais um caracter
-                            ( ( words[i].LastIndexOf('<') - 1 ) - words[i].IndexOf('>') )
-                        ) 
-                    );
+                    Console.Write( words[i+1]);
                     Console.Write(" ");
+                    words[i] = words[i++];
+
+                    if (words[i++] == @"</strong>")
+                    {
+                        Console.Write(" Passei aqui ");
+                        words[i++] = words[i+2];
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine(words[i+2]);
+                        Console.Write(" ");
+
+                    }
                 } else { //Se não der match em nada
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.WriteLine(words[i]);
